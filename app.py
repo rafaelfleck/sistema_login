@@ -41,7 +41,7 @@ def acao_login():
     return template('verificacao_login', sucesso = check_login(username, password), nome = username)
 
 #Validação da pagina para erro 404
-@erro(404)
+@error(404)
 def error404(error):
     return template('page404')
 
