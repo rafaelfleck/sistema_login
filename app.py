@@ -1,4 +1,4 @@
-from bottle import route, run, Bottle, request, template, get, static_file
+from bottle import route, run, Bottle, request, template, get, static_file, error
 import os
 
 
@@ -41,13 +41,13 @@ def acao_login():
     return template('verificacao_login', sucesso = check_login(username, password), nome = username)
 
 #Validação da pagina para erro 404
-@error(404)
+@erro(404)
 def error404(error):
     return template('page404')
 
 
 if __name__ == '__main__':
-   # if os.environ.get('APP_LOCATION') == 'heroku':
-   #     run(host='0.0.0.0', port=int(os.environ.get('PORT',5000)))
-   # else:
+    if os.environ.get('APP_LOCATION') == 'heroku':
+        run(host='0.0.0.0', port=int(os.environ.get('PORT',5000)))
+    else:
         run(host='localhost', port=8081, debug=True, reloader=True)
