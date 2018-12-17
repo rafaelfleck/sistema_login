@@ -1,4 +1,5 @@
-from bottle import route, run, Bottle, request, template, get, static_file, error
+from bottle import route, run, Bottle, request, template, get, static_file
+
 
 #static routes
 @get('/<filename:re:.*\.css>')
@@ -18,7 +19,7 @@ def fonts(filename):
     return static_file(filename, root='static/fonts')
 
 #Inicio da pagina - sera redirecionado para pagina login.html
-@route('/login')
+@route('/')
 def login():
     return template('login')
 
@@ -31,7 +32,7 @@ def check_login(username, password):
     return False
 
 #Ação do fromulario - sera redirecionado para pagina validacao_login.html
-@route('/login', method='POST')
+@route('/', method='POST')
 def acao_login():
     username = request.forms.get('username')
     password = request.forms.get('password')
